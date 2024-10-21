@@ -21,7 +21,7 @@ pipeline{
         stage('Checkout') {
             steps {
                 // Checkout the code from the repository using credentials
-                git credentialsId: "${GITHUB_CREDENTIALS_ID}", url: 'https://github.com/MohamedGouda99/Senior-CI-CD-Pipeline-Developer-Task.git'
+                git credentialsId: "${GITHUB_CREDENTIALS_ID}", branch: 'main', url: 'https://github.com/MohamedGouda99/Senior-CI-CD-Pipeline-Developer-Task.git'
             }
         }
 
