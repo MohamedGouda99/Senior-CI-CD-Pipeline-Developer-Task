@@ -4,31 +4,60 @@ def buildJar(){
      sh './gradlew clean build'
 }
 
-
-
-
 def performSecurityScan() {
     echo "Running OWASP Dependency Check..."
 
     // Define the path for Dependency-Check installation
     def dependencyCheckHome = "${env.WORKSPACE}/dependency-check"
+    def dependencyCheckBin = "${dependencyCheckHome}/dependency-check/bin/dependency-check.sh"
+    def dependencyCheckZip = "${dependencyCheckHome}/dependency-check-8.4.0-release.zip"
     
-    // Clean up the previous installation, download, and unzip the latest version
-    echo "Cleaning up previous Dependency-Check installation..."
-    sh "rm -rf ${dependencyCheckHome}"
-    sh "mkdir -p ${dependencyCheckHome}"
+    // Check if Dependency-Check is already installed
+    if (!fileExists(dependencyCheckBin)) {
+        echo "Dependency-Check not found. Downloading and installing..."
+        
+        // Create the installation directory if it doesn't exist
+        sh "mkdir -p ${dependencyCheckHome}"
+        
+        echo "Downloading Dependency-Check..."
+        sh "wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.0/dependency-check-8.4.0-release.zip -O ${dependencyCheckZip}"
+        
+        echo "Unzipping Dependency-Check..."
+        sh "unzip -o ${dependencyCheckZip} -d ${dependencyCheckHome}"
+    } else {
+        echo "Dependency-Check is already installed. Skipping download and extraction."
+    }
     
-    echo "Downloading Dependency-Check..."
-    sh "wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.0/dependency-check-8.4.0-release.zip -P ${dependencyCheckHome}"
-    
-    echo "Unzipping Dependency-Check..."
-    sh "unzip -o ${dependencyCheckHome}/dependency-check-8.4.0-release.zip -d ${dependencyCheckHome}"
-    
-    // Run the OWASP Dependency-Check using the downloaded version
-    sh "${dependencyCheckHome}/dependency-check/bin/dependency-check.sh --format XML --scan ."
+    // Run the OWASP Dependency-Check using the installed version
+    sh "${dependencyCheckBin} --format XML --scan ."
     
     echo "OWASP Dependency Check complete."
 }
+
+
+
+// def performSecurityScan() {
+//     echo "Running OWASP Dependency Check..."
+
+//     // Define the path for Dependency-Check installation
+//     def dependencyCheckHome = "${env.WORKSPACE}/dependency-check"
+    
+//     // Clean up the previous installation, download, and unzip the latest version
+//     echo "Cleaning up previous Dependency-Check installation..."
+//     sh "rm -rf ${dependencyCheckHome}"
+//     sh "mkdir -p ${dependencyCheckHome}"
+    
+//     echo "Downloading Dependency-Check..."
+//     sh "wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.0/dependency-check-8.4.0-release.zip -P ${dependencyCheckHome}"
+    
+//     echo "Unzipping Dependency-Check..."
+//     sh "unzip -o ${dependencyCheckHome}/dependency-check-8.4.0-release.zip -d ${dependencyCheckHome}"
+    
+//     // Run the OWASP Dependency-Check using the downloaded version
+//     sh "${dependencyCheckHome}/dependency-check/bin/dependency-check.sh --format XML --scan ."
+    
+//     echo "OWASP Dependency Check complete."
+// }
 
 
 // def performSecurityScan() {
@@ -83,7 +112,7 @@ def pushImage() {
         sh "echo \${DOCKER_REGISTRY_PASSWORD} | docker login -u \${DOCKER_REGISTRY_USERNAME} --password-stdin"
         
         // Build Docker image for app.py
-        sh "docker build -t ${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP ."
+        sh "docker build -t ${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP Build-UntitTest/"
         
         // Push the app Docker image to Docker Hub
         sh "docker push docker.io/${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP"
