@@ -5,7 +5,7 @@ def buildJar(){
 }
 
 def performSecurityScan() {
-    sh 'gradlew dependencyCheckAnalyze'
+    sh './gradlew dependencyCheckAnalyze'
 }
 
 
