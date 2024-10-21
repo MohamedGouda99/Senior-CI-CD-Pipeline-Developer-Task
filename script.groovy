@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def buildJar(){
      echo "building the application"
-     sh '/home/Senior_CI_CD_Pipeline_Developer_Task/gradlew clean build'
+     sh './gradlew clean build'
 }
 
 def performSecurityScan() {
