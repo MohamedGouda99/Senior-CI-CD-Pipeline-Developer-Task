@@ -8,7 +8,7 @@ pipeline {
         }
         stage("test") {
             steps {
-                echo "viewing"
+                echo "floos"
             }
         }
     }
