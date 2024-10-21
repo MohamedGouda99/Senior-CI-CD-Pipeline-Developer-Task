@@ -3,7 +3,12 @@ def gv
 
 pipeline{
     agent any
-   
+    environment {
+        // Set the Gradle Home if needed
+        GRADLE_HOME = "${WORKSPACE}/gradlew"
+        // Replace 'github-credentials-id' with the actual ID of your Jenkins GitHub credentials
+        GITHUB_CREDENTIALS_ID = 'github_creds'
+    }
     stages{        
         stage("init"){
             steps{
@@ -13,10 +18,10 @@ pipeline{
             }
         }
 
-    stage('Checkout') {
+        stage('Checkout') {
             steps {
-                // Checkout the code from the repository
-                git 'https://github.com/MohamedGouda99/Senior-CI-CD-Pipeline-Developer-Task.git'
+                // Checkout the code from the repository using credentials
+                git credentialsId: "${GITHUB_CREDENTIALS_ID}", url: 'https://github.com/MohamedGouda99/Senior-CI-CD-Pipeline-Developer-Task.git'
             }
         }
 
