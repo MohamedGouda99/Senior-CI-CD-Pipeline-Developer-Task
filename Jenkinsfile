@@ -3,9 +3,7 @@ def gv
 
 pipeline{
     agent any
-    tools{
-       gradle 'gradle:8.1'
-    }
+   
     stages{        
         stage("init"){
             steps{
