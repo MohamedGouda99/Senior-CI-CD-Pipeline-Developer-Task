@@ -13,6 +13,13 @@ pipeline{
             }
         }
 
+    stage('Checkout') {
+            steps {
+                // Checkout the code from the repository
+                git 'https://github.com/MohamedGouda99/Senior-CI-CD-Pipeline-Developer-Task.git'
+            }
+        }
+
         stage("build jar"){
             steps{
                 script{
