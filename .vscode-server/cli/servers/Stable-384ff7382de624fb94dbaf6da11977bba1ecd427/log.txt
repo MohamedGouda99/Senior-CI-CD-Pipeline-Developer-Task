@@ -1,0 +1,42 @@
+*
+* Visual Studio Code Server
+*
+* By using the software, you agree to
+* the Visual Studio Code Server License Terms (https://aka.ms/vscode-server-license) and
+* the Microsoft Privacy Statement (https://privacy.microsoft.com/en-US/privacystatement).
+*
+Server bound to /tmp/code-e9767b92-0d68-449c-a566-744997788e7e
+Extension host agent listening on /tmp/code-e9767b92-0d68-449c-a566-744997788e7e
+
+[12:09:05] 
+
+
+
+
+[12:09:06] Extension host agent started.
+[12:09:06] Started initializing default profile extensions in extensions installation folder. file:///home/ubuntu/.vscode-server/extensions
+[12:09:06] Completed initializing default profile extensions in extensions installation folder. file:///home/ubuntu/.vscode-server/extensions
+[12:09:06] [<unknown>][1620b365][ManagementConnection] New connection established.
+[12:09:06] [<unknown>][96148d1a][ExtensionHostConnection] New connection established.
+[12:09:06] [<unknown>][96148d1a][ExtensionHostConnection] <4599> Launched Extension Host Process.
+[node.js fs] readdir with filetypes failed with error:  Error: EACCES: permission denied, scandir '/root/'
+    at async Object.readdir (node:internal/fs/promises:948:18)
+    at async GE (file:///home/ubuntu/.vscode-server/cli/servers/Stable-384ff7382de624fb94dbaf6da11977bba1ecd427/server/out/vs/server/node/server.main.js:45:3183)
+    at async Object.yc (file:///home/ubuntu/.vscode-server/cli/servers/Stable-384ff7382de624fb94dbaf6da11977bba1ecd427/server/out/vs/server/node/server.main.js:45:3112)
+    at async Aa.readdir (file:///home/ubuntu/.vscode-server/cli/servers/Stable-384ff7382de624fb94dbaf6da11977bba1ecd427/server/out/vs/server/node/server.main.js:66:14966) {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'scandir',
+  path: '/root/'
+}
+[12:10:50] [<unknown>][1620b365][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[12:10:50] [<unknown>][96148d1a][ExtensionHostConnection] <4599> Extension Host Process exited with code: 0, signal: null.
+Cancelling previous shutdown timeout
+[12:10:50] Cancelling previous shutdown timeout
+Last EH closed, waiting before shutting down
+[12:10:50] Last EH closed, waiting before shutting down
+[12:10:56] [<unknown>][2935c30c][ManagementConnection] New connection established.
+[12:10:56] [<unknown>][a3d3798b][ExtensionHostConnection] New connection established.
+[12:10:56] [<unknown>][a3d3798b][ExtensionHostConnection] <5205> Launched Extension Host Process.
+[12:11:11] [File Watcher] Unexpected error: Permission denied (EUNKNOWN) (path: /)
+[12:11:11] [File Watcher (universal)] Permission denied

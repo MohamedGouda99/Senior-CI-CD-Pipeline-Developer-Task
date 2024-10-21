@@ -1,0 +1,31 @@
+2024-10-21 12:09:06.021 [info] 
+
+
+
+
+2024-10-21 12:09:06.033 [info] Extension host agent started.
+2024-10-21 12:09:06.080 [info] Started initializing default profile extensions in extensions installation folder. file:///home/ubuntu/.vscode-server/extensions
+2024-10-21 12:09:06.100 [info] Completed initializing default profile extensions in extensions installation folder. file:///home/ubuntu/.vscode-server/extensions
+2024-10-21 12:09:06.313 [info] [<unknown>][1620b365][ManagementConnection] New connection established.
+2024-10-21 12:09:06.317 [info] [<unknown>][96148d1a][ExtensionHostConnection] New connection established.
+2024-10-21 12:09:06.386 [info] [<unknown>][96148d1a][ExtensionHostConnection] <4599> Launched Extension Host Process.
+2024-10-21 12:10:50.833 [info] [<unknown>][1620b365][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2024-10-21 12:10:50.866 [info] [<unknown>][96148d1a][ExtensionHostConnection] <4599> Extension Host Process exited with code: 0, signal: null.
+2024-10-21 12:10:50.866 [info] Cancelling previous shutdown timeout
+2024-10-21 12:10:50.866 [info] Last EH closed, waiting before shutting down
+2024-10-21 12:10:56.725 [info] [<unknown>][2935c30c][ManagementConnection] New connection established.
+2024-10-21 12:10:56.726 [info] [<unknown>][a3d3798b][ExtensionHostConnection] New connection established.
+2024-10-21 12:10:56.730 [info] [<unknown>][a3d3798b][ExtensionHostConnection] <5205> Launched Extension Host Process.
+2024-10-21 12:11:11.335 [error] [File Watcher] Unexpected error: Permission denied (EUNKNOWN) (path: /)
+2024-10-21 12:11:11.336 [error] [File Watcher (universal)] Permission denied
+2024-10-21 12:12:22.511 [info] [<unknown>][2935c30c][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2024-10-21 12:12:22.517 [error] Error: Unexpected SIGPIPE
+    at process.<anonymous> (file:///home/ubuntu/.vscode-server/cli/servers/Stable-384ff7382de624fb94dbaf6da11977bba1ecd427/server/out/vs/server/node/server.main.js:189:5899)
+    at process.emit (node:events:531:35)
+2024-10-21 12:12:22.559 [info] [<unknown>][a3d3798b][ExtensionHostConnection] <5205> Extension Host Process exited with code: 0, signal: null.
+2024-10-21 12:12:22.559 [info] Cancelling previous shutdown timeout
+2024-10-21 12:12:22.559 [info] Last EH closed, waiting before shutting down
+2024-10-21 12:12:27.368 [info] [<unknown>][3e940f01][ManagementConnection] New connection established.
+2024-10-21 12:12:27.369 [info] [<unknown>][e7b83a1c][ExtensionHostConnection] New connection established.
+2024-10-21 12:12:27.372 [info] [<unknown>][e7b83a1c][ExtensionHostConnection] <5673> Launched Extension Host Process.
+2024-10-21 12:17:22.560 [info] New EH opened, aborting shutdown

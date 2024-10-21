@@ -1,0 +1,12 @@
+{
+    "workbench.colorTheme": "Monokai Pro",
+    "workbench.iconTheme": "Monokai Pro Icons",
+    "workbench.editorAssociations": {
+        "*.xlsx": "default"
+    },
+    "redhat.telemetry.enabled": true,
+    "editor.fontSize": 16,
+    "remote.SSH.remotePlatform": {
+        "my-server": "linux"
+    }
+}
