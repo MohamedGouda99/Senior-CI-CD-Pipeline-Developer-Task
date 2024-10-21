@@ -9,9 +9,10 @@ def buildJar(){
 
 def performSecurityScan() {
     echo "Running OWASP Dependency Check..."
-
+    
     // Define the path for Dependency-Check installation
     def dependencyCheckHome = "${env.WORKSPACE}/dependency-check"
+    def reportFile = "${env.WORKSPACE}/dependency-check-report.xml"
     
     // Clean up the previous installation, download, and unzip the latest version
     echo "Cleaning up previous Dependency-Check installation..."
@@ -24,11 +25,23 @@ def performSecurityScan() {
     echo "Unzipping Dependency-Check..."
     sh "unzip -o ${dependencyCheckHome}/dependency-check-8.4.0-release.zip -d ${dependencyCheckHome}"
     
-    // Run the OWASP Dependency-Check using the downloaded version
-    sh "${dependencyCheckHome}/dependency-check/bin/dependency-check.sh --format XML --scan ."
+    // Run the OWASP Dependency-Check and generate the report
+    echo "Running Dependency-Check scan..."
+    sh "${dependencyCheckHome}/dependency-check/bin/dependency-check.sh --format XML --out ${reportFile} --scan ."
+    
+    // Check the generated report for vulnerabilities
+    echo "Checking Dependency-Check report for vulnerabilities..."
+    def vulnerabilitiesFound = sh(script: "grep '<severity>' ${reportFile} | grep -i 'Critical\\|High\\|Medium'", returnStatus: true)
+    
+    if (vulnerabilitiesFound == 0) {
+        error "Dependency-Check found vulnerabilities. Failing the build."
+    } else {
+        echo "No critical or high vulnerabilities found. Proceeding with the build."
+    }
     
     echo "OWASP Dependency Check complete."
 }
+
 
 
 
