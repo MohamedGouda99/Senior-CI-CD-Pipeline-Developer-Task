@@ -25,6 +25,18 @@ pipeline{
             }
         }
 
+        stage('Fix Line Endings') {
+            steps {
+                // Convert Windows-style line endings to Unix format
+                script {
+                    if (fileExists('gradlew')) {
+                        // Use dos2unix if available, otherwise use sed
+                        sh 'which dos2unix && dos2unix gradlew || sed -i "s/\\r$//" gradlew'
+                    }
+                }
+            }
+        }
+
         stage("build jar"){
             steps{
                 script{
