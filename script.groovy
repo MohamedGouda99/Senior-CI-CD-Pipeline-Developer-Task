@@ -9,12 +9,27 @@ def buildJar(){
 
 def performSecurityScan() {
     echo "Running OWASP Dependency Check..."
+
+    // Define the path for Dependency-Check installation
+    def dependencyCheckHome = "${env.WORKSPACE}/dependency-check"
     
-    // Ensure this name matches the one configured in Jenkins under Global Tool Configuration
-    dependencyCheck additionalArguments: '--format XML --scan .', odcInstallation: 'OWASP-Dependency-Check'
+    // Clean up the previous installation, download, and unzip the latest version
+    echo "Cleaning up previous Dependency-Check installation..."
+    sh "rm -rf ${dependencyCheckHome}"
+    sh "mkdir -p ${dependencyCheckHome}"
+    
+    echo "Downloading Dependency-Check..."
+    sh "wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.0/dependency-check-8.4.0-release.zip -P ${dependencyCheckHome}"
+    
+    echo "Unzipping Dependency-Check..."
+    sh "unzip -o ${dependencyCheckHome}/dependency-check-8.4.0-release.zip -d ${dependencyCheckHome}"
+    
+    // Run the OWASP Dependency-Check using the downloaded version
+    sh "${dependencyCheckHome}/dependency-check/bin/dependency-check.sh --format XML --scan ."
     
     echo "OWASP Dependency Check complete."
 }
+
 
 
 
