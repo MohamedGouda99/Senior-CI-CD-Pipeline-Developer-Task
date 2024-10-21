@@ -4,9 +4,18 @@ def buildJar(){
      sh './gradlew clean build'
 }
 
+
+
+
 def performSecurityScan() {
-    sh './gradlew dependencyCheckAnalyze'
+    echo "Running OWASP Dependency Check..."
+    
+    // Use the Dependency-Check plugin in Jenkins
+    dependencyCheck additionalArguments: '--format XML', odcInstallation: 'DependencyCheck'
+    
+    echo "OWASP Dependency Check completed."
 }
+
 
 
 def getCommitHash() {
