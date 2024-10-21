@@ -1,11 +1,11 @@
 #!/usr/bin/env groovy
 def buildJar(){
      echo "building the application"
-     sh './gradlew clean build'
+     sh 'gradlew clean build'
 }
 
 def performSecurityScan() {
-    sh './gradlew dependencyCheckAnalyze'
+    sh 'gradlew dependencyCheckAnalyze'
 }
 
 
