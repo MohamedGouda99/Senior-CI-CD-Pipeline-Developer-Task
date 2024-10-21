@@ -13,7 +13,7 @@ def performSecurityScan() {
     // Use the Dependency-Check plugin in Jenkins
     dependencyCheck additionalArguments: '--format XML', odcInstallation: 'DependencyCheck'
     
-    echo "OWASP Dependency Check completed."
+    echo "OWASP Dependency Check complete."
 }
 
 
