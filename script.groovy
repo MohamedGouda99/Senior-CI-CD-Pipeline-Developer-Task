@@ -10,11 +10,12 @@ def buildJar(){
 def performSecurityScan() {
     echo "Running OWASP Dependency Check..."
     
-    // Use the Dependency-Check plugin in Jenkins
-    dependencyCheck additionalArguments: '--format XML', odcInstallation: 'DependencyCheck'
+    // Ensure this name matches the one configured in Jenkins under Global Tool Configuration
+    dependencyCheck additionalArguments: '--format XML --scan .', odcInstallation: 'OWASP-Dependency-Check'
     
     echo "OWASP Dependency Check complete."
 }
+
 
 
 
