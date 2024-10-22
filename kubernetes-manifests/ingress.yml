@@ -9,7 +9,7 @@ metadata:
 
 spec:
   rules:
-    - host: project-app.example.com # Change this to your actual domain or use an IP for testing
+    - host: 
       http:
         paths:
           - path: /
