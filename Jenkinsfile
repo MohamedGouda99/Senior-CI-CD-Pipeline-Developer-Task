@@ -64,6 +64,22 @@ pipeline{
                 }
             }
         }
+
+        stage("Authentication with AWS") {
+            steps {
+                script {
+                    gv.authWithAWS()
+                }
+            }
+        }
+        
+        stage("get kubeconfig") {
+            steps {
+                script {
+                    gv.getKubeConfig()
+                }
+            }
+        }
         
     }
 }       
