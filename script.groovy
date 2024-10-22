@@ -105,6 +105,21 @@ def pushImage() {
     return COMMIT_HASH
 }
 
+def authWithAWS() {
+    echo "Authenticating with AWS..."
 
+    withCredentials([[
+        $class: 'AmazonWebServicesCredentialsBinding',
+        credentialsId: 'aws_credentials'
+    ]]) {
+        // AWS CLI commands will use the provided credentials automatically
+        sh "aws sts get-caller-identity"
+    }
+}
+
+def getKubeConfig(clusterName, region) {
+    echo "Retrieving kubeconfig for EKS cluster ${env.clusterName} in ${env.region}..."
+    sh "aws eks update-kubeconfig --name ${env.clusterName} --region ${env.region}"
+}
 
 return this
