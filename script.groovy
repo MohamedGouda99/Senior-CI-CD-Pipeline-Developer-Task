@@ -112,7 +112,7 @@ def pushImage() {
         sh "echo \${DOCKER_REGISTRY_PASSWORD} | docker login -u \${DOCKER_REGISTRY_USERNAME} --password-stdin"
         
         // Build Docker image for app.py
-        sh "docker build -t ${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP Build-UntitTest/"
+        sh "docker build -t ${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP ."
         
         // Push the app Docker image to Docker Hub
         sh "docker push docker.io/${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP"
