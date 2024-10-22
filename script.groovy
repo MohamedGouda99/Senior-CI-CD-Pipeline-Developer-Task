@@ -54,7 +54,7 @@ def performSecurityScan() {
     sh "unzip -o ${dependencyCheckHome}/dependency-check-8.4.0-release.zip -d ${dependencyCheckHome}"
     
     // Run the OWASP Dependency-Check using the downloaded version
-    sh "/var/lib/jenkins/workspace/java_app/dependency-check/dependency-check/bin/dependency-check.sh --format XML --scan ."
+    sh "${dependencyCheckHome}/dependency-check/bin/dependency-check.sh --format XML --scan ."
     
     echo "OWASP Dependency Check complete."
 }
