@@ -78,7 +78,7 @@ pipeline{
         stage("get kubeconfig") {
             steps {
                 script {
-                    gv.getKubeConfig()
+                    gv.deploy()
                 }
             }
         }
