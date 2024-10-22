@@ -92,7 +92,7 @@ def deploy() {
     ]]) {
         // Update kubeconfig using the provided credentials
         sh "aws eks update-kubeconfig --name ${env.clusterName} --region ${env.region}"
-        sh "chmod +x /kubernetes/get_LB_url.sh"
+        sh "chmod +x ./kubernetes/get_LB_url.sh"
         sh "./kubernetes/get_LB_url.sh"
         sh "kubectl -f /kubernetes/*.yml"
         echo "Got kubeconfig"
