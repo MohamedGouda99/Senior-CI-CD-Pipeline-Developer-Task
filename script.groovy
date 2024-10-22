@@ -120,6 +120,7 @@ def authWithAWS() {
 def getKubeConfig(clusterName, region) {
     echo "Retrieving kubeconfig for EKS cluster ${env.clusterName} in ${env.region}..."
     sh "aws eks update-kubeconfig --name ${env.clusterName} --region ${env.region}"
+    sh "Got kubeconfig"
 }
 
 return this
