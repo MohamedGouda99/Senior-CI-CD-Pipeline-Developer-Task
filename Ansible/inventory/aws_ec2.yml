@@ -1,0 +1,19 @@
+---
+plugin: amazon.aws.aws_ec2
+aws_profile: default
+regions:
+  - us-east-1
+filter: 
+  tag:Name:
+  - 'jenkins'
+hostnames:
+- ip-address
+use_contrib_script_compatible_sanitization: True
+use_contrib_script_compatible_ec2_tag_keys: True
+keyed_groups:
+  - key: tags.Name
+    separator: ''
+hostvars:
+  ansible_user: ubuntu
+
+  
