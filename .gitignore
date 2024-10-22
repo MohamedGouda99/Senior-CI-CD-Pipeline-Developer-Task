@@ -1,0 +1,6 @@
+# Ignore Terraform files
+./IAC/*.tf
+./IAC/.terraform/*
+./IAC/terraform.tfstate.backup
+./IAC/terraform.tfstate
+.bashrc

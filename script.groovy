@@ -2,8 +2,8 @@
 def buildJar(){
      echo "building the application"
      sh './gradlew clean build'
-     sh "terraform --version"
 }
+
 
 def performSecurityScan() {
     echo "Running OWASP Dependency Check..."

@@ -48,6 +48,14 @@ pipeline{
                 }
             }
         }
+
+        stage("Implement Infrastructure"){
+            steps{
+                script{
+                    gv.implementInfra()
+                }
+            }
+        }
         
 
         stage("OWASP Scanning"){
