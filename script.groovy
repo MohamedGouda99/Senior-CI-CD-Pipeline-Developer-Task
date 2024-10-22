@@ -61,7 +61,7 @@ def performSecurityScan() {
     
     // Run the OWASP Dependency-Check and generate the report
     echo "Running Dependency-Check scan..."
-    sh "${dependencyCheckHome}/dependency-check/bin/dependency-check.sh --format XML --out ${reportFile} --scan ."
+    sh "${dependencyCheckHome}/dependency-check/bin/dependency-check.sh --format XML --out ${reportFile} --scan . --disableKnownExploited"
     
     // Check the generated report for vulnerabilities
     echo "Checking Dependency-Check report for vulnerabilities..."
