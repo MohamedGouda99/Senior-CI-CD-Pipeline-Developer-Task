@@ -1,4 +1,6 @@
 // @Library('SharedLibrary') _
+
+@Library('github.com/releaseworks/jenkinslib') _
 def gv
 
 pipeline{
