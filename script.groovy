@@ -116,7 +116,7 @@ def pushImage() {
         
         // Push the app Docker image to Docker Hub
         sh "docker push docker.io/${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP"
-        
+        sh "echo done"
         // // Remove the locally built app Docker image
         // sh "docker rmi -f ${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP"
     }
