@@ -93,7 +93,7 @@ def deploy() {
         // Update kubeconfig using the provided credentials
         sh "aws eks update-kubeconfig --name ${env.clusterName} --region ${env.region}"
         sh "chmod +x ./kubernetes-manifests/get_LB_url.sh"
-        sh "kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.31""
+        sh "kubectl apply -k 'github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.31'"
         sh "kubectl apply -f ./kubernetes-manifests/deployment.yml"
         sh "kubectl apply -f ./kubernetes-manifests/pvc.yml"
         sh "kubectl apply -f ./kubernetes-manifests/svc.yml"
