@@ -41,6 +41,68 @@ def performSecurityScan() {
 
 
 
+def getCommitHash() {
+    return sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+}
+
+
+def pushImage() {
+    def COMMIT_HASH = getCommitHash()
+    withCredentials([usernamePassword(
+        credentialsId: 'docker_hub', 
+        usernameVariable: 'DOCKER_REGISTRY_USERNAME', 
+        passwordVariable: 'DOCKER_REGISTRY_PASSWORD'
+    )]) {
+        // Authenticate with Docker Hub to push Docker image
+        sh "echo \${DOCKER_REGISTRY_PASSWORD} | docker login -u \${DOCKER_REGISTRY_USERNAME} --password-stdin"
+        
+        // Build Docker image for app.py
+        sh "docker build -t ${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP ."
+        
+        // Push the app Docker image to Docker Hub
+        sh "docker push docker.io/${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP"
+        sh "echo done"
+        // // Remove the locally built app Docker image
+        // sh "docker rmi -f ${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP"
+    }
+    
+    return COMMIT_HASH
+}
+
+
+
+def authWithAWS() {
+    echo "Authenticating with AWS..."
+
+    withCredentials([[
+        $class: 'AmazonWebServicesCredentialsBinding',
+        credentialsId: 'aws_credentials'
+    ]]) {
+        // AWS CLI commands will use the provided credentials automatically
+        sh "aws sts get-caller-identity"
+    }
+}
+
+def deploy() {
+    echo "Retrieving kubeconfig for EKS cluster ${env.clusterName} in ${env.region}..."
+
+    withCredentials([[
+        $class: 'AmazonWebServicesCredentialsBinding',
+        credentialsId: 'aws_credentials'
+    ]]) {
+        // Update kubeconfig using the provided credentials
+        sh "aws eks update-kubeconfig --name ${env.clusterName} --region ${env.region}"
+        sh "chmod +x /kubernetes/get_LB_url.sh"
+        sh "./kubernetes/get_LB_url.sh"
+        sh "kubectl -f /kubernetes/*.yml"
+        echo "Got kubeconfig"
+    }
+}
+
+return this
+
+
+
 // def performSecurityScan() {
 //     echo "Running OWASP Dependency Check..."
     
@@ -75,62 +137,3 @@ def performSecurityScan() {
     
 //     echo "OWASP Dependency Check complete."
 // }
-
-
-def getCommitHash() {
-    return sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-}
-
-
-def pushImage() {
-    def COMMIT_HASH = getCommitHash()
-    withCredentials([usernamePassword(
-        credentialsId: 'docker_hub', 
-        usernameVariable: 'DOCKER_REGISTRY_USERNAME', 
-        passwordVariable: 'DOCKER_REGISTRY_PASSWORD'
-    )]) {
-        // Authenticate with Docker Hub to push Docker image
-        sh "echo \${DOCKER_REGISTRY_PASSWORD} | docker login -u \${DOCKER_REGISTRY_USERNAME} --password-stdin"
-        
-        // Build Docker image for app.py
-        sh "docker build -t ${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP ."
-        
-        // Push the app Docker image to Docker Hub
-        sh "docker push docker.io/${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP"
-        sh "echo done"
-        // // Remove the locally built app Docker image
-        // sh "docker rmi -f ${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP"
-    }
-    
-    return COMMIT_HASH
-}
-
-
-
-
-def authWithAWS() {
-    echo "Authenticating with AWS..."
-
-    withCredentials([[
-        $class: 'AmazonWebServicesCredentialsBinding',
-        credentialsId: 'aws_credentials'
-    ]]) {
-        // AWS CLI commands will use the provided credentials automatically
-        sh "aws sts get-caller-identity"
-    }
-}
-
-def getKubeConfig() {
-    echo "Retrieving kubeconfig for EKS cluster ${env.clusterName} in ${env.region}..."
-
-    withCredentials([[
-        $class: 'AmazonWebServicesCredentialsBinding',
-        credentialsId: 'aws_credentials'
-    ]]) {
-        // Update kubeconfig using the provided credentials
-        sh "aws eks update-kubeconfig --name ${env.clusterName} --region ${env.region}"
-        echo "Got kubeconfig"
-    }
-}
-
-return this
