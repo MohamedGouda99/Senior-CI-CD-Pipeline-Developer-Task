@@ -2,11 +2,8 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: my-ebs
-provisioner: kubernetes.io/aws-ebs
+provisioner: kubernetes.io/aws-ebs  # or other provisioner like kubernetes.io/gce-pd, etc.
 parameters:
-  type: gp2 # Change to gp3 if using newer EBS types
-  fsType: ext4
-  encrypted: "true" # Optional: Enables encryption at rest
-reclaimPolicy: Delete
-allowVolumeExpansion: true
-volumeBindingMode: WaitForFirstConsumer
+  type: gp2  # Parameters specific to the provisioner, e.g., AWS EBS volume type
+reclaimPolicy: Retain
+volumeBindingMode: Immediate

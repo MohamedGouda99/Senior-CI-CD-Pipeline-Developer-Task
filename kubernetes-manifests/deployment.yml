@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: container
-          image: docker.io/${env.DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP
+          image: docker.io/${DOCKER_REGISTRY}:Build-${COMMIT_HASH}-APP
           ports:
             - containerPort: 8080
           resources:   # Resource limits and requests for the container
