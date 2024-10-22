@@ -105,6 +105,9 @@ def pushImage() {
     return COMMIT_HASH
 }
 
+
+
+
 def authWithAWS() {
     echo "Authenticating with AWS..."
 
@@ -119,8 +122,15 @@ def authWithAWS() {
 
 def getKubeConfig() {
     echo "Retrieving kubeconfig for EKS cluster ${env.clusterName} in ${env.region}..."
-    sh "aws eks update-kubeconfig --name ${env.clusterName} --region ${env.region}"
-    sh "Got kubeconfig"
+
+    withCredentials([[
+        $class: 'AmazonWebServicesCredentialsBinding',
+        credentialsId: 'aws_credentials'
+    ]]) {
+        // Update kubeconfig using the provided credentials
+        sh "aws eks update-kubeconfig --name ${env.clusterName} --region ${env.region}"
+        echo "Got kubeconfig"
+    }
 }
 
 return this
