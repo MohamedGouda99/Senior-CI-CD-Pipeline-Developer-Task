@@ -70,6 +70,7 @@ def pushImage() {
     sh """
     sed -i 's|image:.*|image: docker.io/${imageName}|g' ./kubernetes-manifests/deployment.yml
     """
+    sh "grep 'image:' ./kubernetes-manifests/deployment.yml"
     
     // Return the image name for potential further use
     return imageName

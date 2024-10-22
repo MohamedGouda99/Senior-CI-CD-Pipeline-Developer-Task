@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: container
-          image: docker.io/gouda99/my-repo:Build-ce37128-APP
+          image: 
           ports:
             - containerPort: 8080
           resources:   # Resource limits and requests for the container
