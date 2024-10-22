@@ -8,7 +8,7 @@ SERVICE_NAME="svc-app"  # Change to your service name
 LB_URL=$(kubectl get svc -n $NAMESPACE $SERVICE_NAME -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 
 # Update the Ingress YAML file
-INGRESS_FILE="./ingress.yml"  # Replace with your Ingress YAML file name
+INGRESS_FILE="ingress.yml"  # Replace with your Ingress YAML file name
 
 # Check if the file exists
 if [ -f "$INGRESS_FILE" ]; then
