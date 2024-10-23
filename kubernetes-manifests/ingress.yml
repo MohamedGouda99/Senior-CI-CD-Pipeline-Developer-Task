@@ -9,7 +9,7 @@ metadata:
 
 spec:
   rules:
-    - host: a0d9eb8e226f4430e8f4e4b7f5072d5b-2056231536.us-east-1.elb.amazonaws.com
+    - host: a127098b974fb46408d9c3beb184dd6b-1121898016.us-east-1.elb.amazonaws.com
       http:
         paths:
           - path: /

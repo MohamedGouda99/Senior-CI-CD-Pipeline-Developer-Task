@@ -104,6 +104,7 @@ def deploy() {
         sh "chmod +x ./kubernetes-manifests/get_LB_url.sh"
         sh "kubectl apply -k 'github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.31'"
         sh "kubectl apply -f ./kubernetes-manifests/deployment.yml"
+        sh "kubectl apply -f ./kubernetes-manifests/storageclass.yml"
         sh "kubectl apply -f ./kubernetes-manifests/pvc.yml"
         sh "kubectl apply -f ./kubernetes-manifests/svc.yml"
         sh "./kubernetes-manifests/get_LB_url.sh"
