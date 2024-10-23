@@ -4,6 +4,7 @@ Deploy Spring Boot App on EKS Cluster using Jenkins' is a DevOps project focused
 
 ## Architecture 
 
+![Jenkins Token](screenshots/Block_diagram.png)
 
 ## Purpose
 The purpose of this project is to establish a seamless and automated process for deploying a Spring Boot application on an Amazon EKS cluster using Jenkins. By leveraging industry-standard DevOps tools such as GitHub, AWS, Terraform, Ansible, Docker, and OWASP, this initiative aims to improve the efficiency, security, and scalability of application deployment. It focuses on reducing manual effort, minimizing errors, and ensuring a reliable, repeatable process for managing applications in the AWS environment.
