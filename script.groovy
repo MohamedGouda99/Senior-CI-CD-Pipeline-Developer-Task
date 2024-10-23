@@ -108,6 +108,7 @@ def deploy() {
         sh "kubectl apply -f ./kubernetes-manifests/svc.yml"
         sh "./kubernetes-manifests/get_LB_url.sh"
         sh "kubectl apply -f ./kubernetes-manifests/ingress.yml"
+        sh "kubectl get ingress"
         echo "Deployment is done"
     }
 }
